@@ -80,33 +80,37 @@ namespace AutoTeamPlus
 				return false;
 			}
 
+			var ret = false;
+
 			if (ply.Group.HasPermission("autoteam.none"))
 			{
 				ply.SetTeam(0);
+				ret = true;
 			}
 			if (ply.Group.HasPermission("autoteam.red"))
 			{
 				ply.SetTeam(1);
+				ret = true;
 			}
 			if (ply.Group.HasPermission("autoteam.green"))
 			{
 				ply.SetTeam(2);
+				ret = true;
 			}
 			if (ply.Group.HasPermission("autoteam.blue"))
 			{
 				ply.SetTeam(3);
+				ret = true;
 			}
 			if (ply.Group.HasPermission("autoteam.yellow"))
 			{
 				ply.SetTeam(4);
+				ret = true;
 			}
-			else
-			{
-				return false;
-			}
-
-			ply.SendInfoMessage("Your team has been changed to {0}.", ply.Team == 0 ? "none" : ply.Team == 1 ? "the red team" : ply.Team == 2 ? "the green team" : ply.Team == 3 ? "the blue team" : "the yellow team");
-			return true;
+			
+			if(ret)
+				ply.SendInfoMessage("Your team has been changed to {0}.", ply.Team == 0 ? "none" : ply.Team == 1 ? "the red team" : ply.Team == 2 ? "the green team" : ply.Team == 3 ? "the blue team" : "the yellow team");
+			return ret;
 		}
 	}
 }
