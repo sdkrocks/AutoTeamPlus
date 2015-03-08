@@ -10,7 +10,7 @@ using TShockAPI.Hooks;
 
 namespace AutoTeamPlus
 {
-	[ApiVersion(1,16)]
+	[ApiVersion(1,17)]
 	public class AutoTeamPlus : TerrariaPlugin
 	{
 		public override string Author
