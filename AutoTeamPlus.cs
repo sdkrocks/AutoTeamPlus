@@ -6,7 +6,7 @@ using TShockAPI.Hooks;
 
 namespace AutoTeamPlus
 {
-    [ApiVersion(1, 23)]
+    [ApiVersion(2, 1)]
     public class AutoTeamPlus : TerrariaPlugin
     {
         public override string Author
@@ -51,12 +51,12 @@ namespace AutoTeamPlus
             base.Dispose(disposing);
         }
 
-        private void OnJoin(GreetPlayerEventArgs args)
+        public void OnGreetPlayer(GreetPlayerEventArgs e)
         {
-            var ply = TShock.Players[args.Who];
+            var ply = TShock.Players[e.Who];
+
             SetTeam(ply);
         }
-
         private void OnTeamChange(object sender, GetDataHandlers.PlayerTeamEventArgs args)
         {
             var ply = TShock.Players[args.PlayerId];
@@ -64,9 +64,15 @@ namespace AutoTeamPlus
             args.Handled = SetTeam(ply);
         }
 
+        private void OnJoin(GreetPlayerEventArgs args)
+        {
+            var ply = TShock.Players[args.Who];
+            SetTeam(ply);
+        }
         private void OnLogin(PlayerPostLoginEventArgs args)
         {
-            SetTeam(args.Player);
+            var ply = args.Player;
+            SetTeam(ply);
         }
 
         private bool SetTeam(TSPlayer ply)
